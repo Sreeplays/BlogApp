@@ -60,8 +60,8 @@ const Header = () => {
     const showContent = open && ContentMob
     return (
       <div
-      onClickCapture={() => setOpen(true)}
-      onMouseOutCapture={() => setOpen(false)}
+      onTouchEnd={() => setOpen(true)}
+      onMouseOut={() => setOpen(false)}
       className='group relative h-fit w-fit'
       >
         {/* Link animation and stuff */}
