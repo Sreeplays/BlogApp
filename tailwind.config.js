@@ -5,6 +5,8 @@ module.exports = {
     ],
     theme: {
       screens: {
+        xs: '300px', 
+        // => @media (min-width: 300px) ( ... )
         sm: '640px',
         // => @media (min-width: 640px) ( ... )
         md: '768px',
@@ -29,7 +31,7 @@ module.exports = {
           primary: "#1565D8",
           dark: {
             light: "#5A7184",
-            hard: "0D2436",
+            hard: "#0D2436",
             soft: "#183B56"
           },
         },

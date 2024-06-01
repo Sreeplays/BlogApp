@@ -5,13 +5,17 @@ import postImage from '../assets/posts-images/post-card.png'
 import postImage2 from '../assets/posts-images/post-card-image-2.png'
 import userImage from  '../assets/posts-images/post-user-img.png'
 import testIcon from '../assets/posts-images/Icon.png'
+import cardImg from '../assets/card.png'
+import FooterLogo from '../assets/Logo2-removebg-preview.png'
 const images = {
  logo,
  HeroImage,
  postImage,
  postImage2,
  userImage,
- testIcon
+ testIcon,
+ cardImg,
+ FooterLogo
 }
 
 export default images
