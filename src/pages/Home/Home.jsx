@@ -10,7 +10,6 @@ const Home = () => {
     <MainLayout>
       <Hero />
       <ArticleCard />
-      <CTA />
     </MainLayout>
   )
 }

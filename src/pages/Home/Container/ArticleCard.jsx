@@ -9,7 +9,7 @@ const ArticleCard = () => {
         <Articles className="w-full"/>
       </div>
       <button className='mx-auto'>
-        <span className='flex justify-center items-center text-primary border border-primary py-2 px-4 border-2 text-center rounded-md'>More Articles <BiArrowFromLeft className='w-4 h-4 text-primary flex mx-2 mt-0.5' /></span>
+        <span className='flex justify-center items-center text-primary border-primary py-2 px-4 border-2 text-center rounded-md'>More Articles <BiArrowFromLeft className='w-4 h-4 text-primary flex mx-2 mt-0.5' /></span>
       </button>
     </div>
   )

@@ -115,7 +115,7 @@ const Header = () => {
                  <NavLink href='/'><img src={images.logo} alt="sreeplays" className='w-24 pt-5' /></NavLink>
             </NavbarBrand>
             <div className='my-4 hidden md:flex'>
-              <div className='pl-6' > Blog</div>
+              <div className='pl-6' > <NavLink href="/blog/:id">Blog</NavLink></div>
               {/* Children and the content is passed through here to PagesLink CONSTANT */}
               <PagesLink Content={pageContent}>Pages <IoIosArrowDown className='absolute left-16 top-1 ml-1 pl-0.5'/></PagesLink>
               <div className='pl-8'>FAQ</div>
@@ -135,7 +135,7 @@ const Header = () => {
       {/* dropdown menu for mobiles */}
       <AnimatePresence>
       <motion.div initial={{opacity:0, y: 8}} animate={{opacity:1, y: 0}} exit={{opacity:0, y: 8}} className={!nav ? 'hidden transition-transform ease-out duration-500 relative border-none' : 'md:hidden w-full ease-out pt-2 pr-2 transition-transform duration-500 bg-slate-50 shadow-md fixed'}>
-        <div className='pl-3 border-b pb-3 pt-2 border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300'><NavLink href='/blog'>Blog</NavLink></div>
+        <div className='pl-3 border-b pb-3 pt-2 border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300'><NavLink href='/blog/:id'>Blog</NavLink></div>
         <PagesLinkMob href="javaScript:;" ContentMob={pageContent}>Pages <IoIosArrowDown className='absolute left-14 top-1/4 pl-0.5'/></PagesLinkMob>
         <div className='pl-3 border-b pb-3 font-bold border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300'></div>
         <div className='pl-3 border-b pb-3 pt-2 border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300'>FAQ</div>

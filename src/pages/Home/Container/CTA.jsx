@@ -15,7 +15,7 @@ const CTA = () => {
                 fillRule="evenodd"
                 clipRule="evenodd"
                 d="M2160 262.5H0V0C360 80 720 120 1080 120C1440 120 1800 80 2160 0V262.5Z"
-                fill="#0D2436"
+                fill="#0D2436" 
             />
         </svg>
         <section className='relative bg-dark-hard px-5 text-center'>
