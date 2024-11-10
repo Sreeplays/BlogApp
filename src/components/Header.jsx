@@ -25,14 +25,14 @@ const Header = () => {
       className='group relative h-fit w-fit'
       >
         {/* Link animation and stuff */}
-        <a href={href} className='pl-6'>
+        <button className='pl-6'>
           {children}
           <span
           style={{
             transform: showContent ? "scaleX(1)" : "scaleX(0)",
           }}
           className='absolute -bottom-1 -right-2 left-4 h-1 origin-left rounded-full bg-sky-600 transition-transform duration-500 ease-out'/>
-        </a>
+        </button>
         {/* Flyout Content */}
         <AnimatePresence>
         {showContent &&
@@ -65,14 +65,14 @@ const Header = () => {
       className='group relative h-fit w-fit'
       >
         {/* Link animation and stuff */}
-        <a href="javaScript:;" className='pl-3'>
+        <button className='pl-3'>
           {children}
           <span
           style={{
             transform: showContent ? "scaleX(1)" : "scaleX(0)",
           }}
           className='absolute -bottom-1 -right-2 left-4 h-1 origin-left rounded-full bg-sky-600 transition-transform duration-500 ease-out'/>
-        </a>
+        </button>
         {/* Flyout Content */}
         <AnimatePresence>
         {showContent &&
