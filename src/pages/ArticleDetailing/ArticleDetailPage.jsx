@@ -46,7 +46,7 @@ const ArticleDetailPage = () => {
   ]
   return (
     <MainLayout>
-        <section className='container mx-auto max-w-5xl flex flex-col px-5 py-5 items-center lg:flex-row lg:items-start lg:gap-x-5'>
+        <section className='container mx-auto max-w-5xl flex flex-col px-5 py-5 items-center lg:flex-row lg:items-start lg:gap-x-3'>
             <article className='flex-1'>
                 <button><BiSolidArrowFromRight  onClick={history_back} className='w-6 h-6 text-opacity-80 text-gray-800 mb-4'/></button>
                 <img className='rounded-xl w-full lg:w-1/2' src={images.postImage} alt="" />   
