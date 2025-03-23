@@ -15,7 +15,7 @@ const COMMENTS = ({comment}) => {
             hour: 'numeric',
           })}
         </span>
-        <p className='text-dark-light font-sm font-light '>{comment.des}</p>
+        <p className='text-dark-light font-sm font-light border-2 border-l-black border-r-transparent border-t-transparent border-b-transparent pl-4 rounded-sm'>{comment.des}</p>
       </div>
     </div>
   )
