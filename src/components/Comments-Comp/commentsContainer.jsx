@@ -3,10 +3,10 @@ import CommentsForm from './commentsForm'
 import {getCommentsData} from '../../data/comments'
 import COMMENTS from './COMMENTS'
 
-const CommentsContainer = ({className}) => {
+const CommentsContainer = ({className, loggedUserId}) => {
   const [comment, setComment] = useState([])
   const mainComment = comment.filter((comments) => comments.parent == null)
-
+  const [affectedComment, setaffectedComment] = useState(null)
   console.log(comment)
 
   useEffect(() => {
@@ -34,9 +34,9 @@ const CommentsContainer = ({className}) => {
   return (
     <div className={'${className}'}>
         <CommentsForm btnLabel="Send" formSubmitHandler ={(value) => addComentHandler(value)} />
-        <div className='space-y-4 px-5 mt-5 mb-5'>
+        <div className='space-y-4 md:px-5 px-10 mt-5 mb-5'>
           {mainComment.map((comment) => ( 
-              <COMMENTS comment={comment}/>
+              <COMMENTS key={comment._id} comment={comment} loggedUserId={loggedUserId} affectedComment={affectedComment} setaffectedComment={setaffectedComment} addComment={addComentHandler}/>
           ))}
         </div>
     </div>

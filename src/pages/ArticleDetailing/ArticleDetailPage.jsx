@@ -1,9 +1,8 @@
 import React from 'react'
 
 import MainLayout from '../../components/MainLayout.jsx'
-import CTA from '../Home/Container/CTA.jsx'
 import BreadCrumbs from '../../components/BreadCrumbs.jsx'
-import { BiArrowFromLeft, BiArrowFromRight, BiSolidArrowFromRight } from 'react-icons/bi';
+import {BiSolidArrowFromRight } from 'react-icons/bi';
 import images from '../../constants/images.js';
 import { Link } from 'react-router-dom';
 import SuggestedPosts from './SuggestedPosts/suggestedPosts.jsx';
@@ -57,7 +56,7 @@ const ArticleDetailPage = () => {
 
 Culpa deserunt magna do sit cillum. Sit dolore elit tempor ea sint ut sint veniam. Dolor eiusmod in consectetur qui veniam dolore id anim occaecat non excepteur. Nulla sint sit ut dolore cillum ut cupidatat quis in minim culpa consectetur. Duis fugiat officia id esse culpa ex cillum consequat deserunt.</p>
                 </div>
-                <CommentsContainer />
+                <CommentsContainer loggedUserId="a"/>
             </article>
             <SuggestedPosts header="Latest Articles" posts={postsData} tags={tagsData}/>
         </section>

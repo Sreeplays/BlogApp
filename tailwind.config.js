@@ -19,6 +19,24 @@ module.exports = {
         // => @media (min-width: 1536px) ( ... )
   
       },
+      fontSize: {
+        base: "16px",
+        xs: "14px",
+        xm: "15px",
+        sm: "16px",
+        md: "18px",
+        lg: "20px",
+        xl: "22px",
+        "2xl": "24px",
+        "3xl": "28px",
+        "4xl": "32px",
+        "5xl": "36px",
+        "6xl": "40px",
+        "7xl": "48px",
+        "8xl": "56px",
+        "9xl": "64px",
+        "10xl": "72px",
+      },
       extend: {
         boxShadow: {
           '5xl': '20px 20px 50px rgba(0,0,0,0.5)',

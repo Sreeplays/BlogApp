@@ -1,5 +1,4 @@
 import React from 'react'
-import images from '../../../constants/images'
 import { Link } from 'react-router-dom'
 
 const SuggestedPosts = ({header, posts = [], tags}) => {
