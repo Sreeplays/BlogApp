@@ -29,7 +29,7 @@ const COMMENTS = ({
   const repliedParentId = parentId ? parentId : comment._id;
   const repliedUserId = comment.user_id;
   return (
-    <div className="flex flex-nowrap items-start p-4 px-10 md:px-4 rounded-xl bg-[#F2F4F5] gap-x-4">
+    <div className="flex flex-wrap md:flex-nowrap items-start p-3 px-12 md:px-4 rounded-xl bg-[#F2F4F5] gap-x-2">
       <img
         src={images.userImage}
         alt="user profile"

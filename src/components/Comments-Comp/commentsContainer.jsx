@@ -65,7 +65,7 @@ const CommentsContainer = ({ className, loggedUserId }) => {
         btnLabel="Send"
         formSubmitHandler={(value) => addComentHandler(value)}
       />
-      <div className="space-y-4 md:px-5 px-10 mt-5 mb-5">
+      <div className="space-y-4 px-5 mt-5 mb-5">
         {mainComment.map((comment) => (
           <COMMENTS
             key={comment._id}
