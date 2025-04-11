@@ -107,12 +107,12 @@ const Header = () => {
   }
   return ( 
     <div className='sticky top-0 left-0 right-0 z-50'>
-      <Navbar className=' md:pb-0 pb-4 flex w-full h-full justify-between backdrop-blur-0 border border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300 bg-slate-50 shadow-md'>
+      <Navbar className=' md:pb-0 pb-4 flex w-full h-full justify-between backdrop-blur-0 border border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300 bg-slate-50 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]'>
         {/* Desktop navbar */}
         <div>
           <div className="flex">
             <NavbarBrand className=''>
-                 <NavLink href='/'><img src={images.logo} alt="sreeplays" className='w-24 pt-5' /></NavLink>
+                 <NavLink href='/'><img src={images.logo} alt="MindLog-Png" className='w-24 pt-4' /></NavLink>
             </NavbarBrand>
             <div className='my-4 hidden md:flex'>
               <div className='pl-6' > <NavLink href="/blog/:id">Blog</NavLink></div>
@@ -121,7 +121,7 @@ const Header = () => {
               <div className='pl-8'>FAQ</div>
             </div>
               <div className='md:flex hidden pr-3 lg:right-2 right-4 fixed top-1.5'>
-                <Button className='text-[#1565D8] border border-[#1565D8] rounded-2xl px-3 py-2'>Sign Up</Button>
+                <Button className='text-[#1565D8] border border-[#1565D8] rounded-2xl px-3 py-2' ><NavLink href='/register'>Sign Up</NavLink></Button>
               </div>
           </div>
 
@@ -139,7 +139,7 @@ const Header = () => {
         <PagesLinkMob href="javaScript:;" ContentMob={pageContent}>Pages <IoIosArrowDown className='absolute left-14 top-1/4 pl-0.5'/></PagesLinkMob>
         <div className='pl-3 border-b pb-3 font-bold border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300'></div>
         <div className='pl-3 border-b pb-3 pt-2 border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300'>FAQ</div>
-        <Button className='text-[#1565D8] border border-[#1565D8] rounded-lg px-3 py-1 mx-2 my-2'>Sign Up</Button>
+        <Button className='text-[#1565D8] border border-[#1565D8] rounded-lg px-3 py-1 mx-2 my-2'><NavLink href='/register'>Sign Up</NavLink></Button>
       </motion.div>
       </AnimatePresence>
     </div>

@@ -7,7 +7,7 @@ const Hero = () => {
     <section className='container mx-auto flex flex-col px-5 py-5 lg:flex-row'>
       <div className='mt-10 lg:w-1/2'>
         <h1 className='font-roboto text-dark-soft text-4xl text-center font-extrabold md:text-6xl lg:text-left lg:max-w-[540px]'>Read. Reflect. Repeat.</h1>
-        <p className='text-dark-light text-md text-center mt-4 md:text-xl lg:text-left'>Welcome to Sreeplays – Your Ultimate Hub for Engaging Reads! Dive into a world where every article is crafted to inspire, inform, and entertain. Whether you're here to explore new ideas, stay updated with the latest trends, or simply enjoy a good read, Sreeplays is your go-to destination. Happy reading!</p>
+        <p className='text-dark-light text-md text-center mt-4 md:text-xl lg:text-left'>Welcome to MindLog – Your Ultimate Hub for Engaging Reads! Dive into a world where every article is crafted to inspire, inform, and entertain. Whether you're here to explore new ideas, stay updated with the latest trends, or simply enjoy a good read, MindLog is your go-to destination. Happy reading!</p>
         <p className='italic font-light pl-2 xs:text-sm text-center lg:text-start'>*A prototype blog-app; author:- <span className='underline font-semibold text-dark-light'> <a href="https://github.com/Sreeplays" target='_blank' rel='noreferrer'>@Sreeplays</a></span></p>
         
         <div className='flex flex-col gap-y-2 mt-10 relative items-center lg:items-start'>

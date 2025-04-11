@@ -2,7 +2,9 @@ import React from 'react'
 import images from '../constants/images'
 import { BsCheck2, BsCheckLg, BsFileCheckFill } from 'react-icons/bs'
 import { BiCheck } from 'react-icons/bi'
+
 const Articles = ({className}) => {
+
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 md:gap-x-4 md:gap-y-5 lg:gap-x-8 lg:gap-y-6 '>
       <div className={'rounded-xl overflow-hidden shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)] ${className} '}>
