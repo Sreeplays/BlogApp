@@ -13,7 +13,7 @@ const Hero = () => {
         <div className='flex flex-col gap-y-2 mt-10 relative items-center lg:items-start'>
           <div className='relative'>
             <FiSearch className='absolute left-2 top-1/2 -translate-y-1/2 w-5 h-5 text-[#959EAD]'/>
-            <input type="text" className='py-3 placeholder:font-bold placeholder:text-[#959EAD] font-semibold text-dark-soft pl-12 pr-[77px] md:items-center lg:items-start shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] rounded-xl focus:outline-none' placeholder='Search...'/>
+            <input type="text" className='py-3 placeholder:font-bold placeholder:text-[#959EAD] font-semibold text-dark-soft pl-12 pr-[77px] w-full md:items-center lg:items-start shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] rounded-xl focus:outline-none' placeholder='Search...'/>
           </div>
           <Button className='w-1/2 bg-primary text-white font-semibold rounded-lg px-4 py-3 md:absolute lg:left-[220px] lg:top-1/2 lg:-translate-y-1/2 lg:w-fit lg:py-2 md:-bottom-14 lg:-bottom-4'>Search !!</Button>
         </div>

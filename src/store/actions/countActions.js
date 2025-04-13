@@ -1,11 +1,11 @@
-import { countActions } from "../reducer/countReducers";
+// import { userActions } from "../reducer/userReducers";
 
-export const countActionsOnClick = (type) => (dispatch, getState) => {
-    const {count} = getState();
+// export const userActionsOnClick = (type) => (dispatch, getState) => {
+//     const {user} = getState();
 
-    if(type === "INCREASE") {
-        dispatch(countActions.countChange(count.number + 1))
-    } else {
-        dispatch(countActions.countChange(count.number - 1))
-    }
-}
+//     if(type === "INCREASE") {
+//         dispatch(userActions.userChange(user.number + 1))
+//     } else {
+//         dispatch(userActions.userChange(user.number - 1))
+//     }
+// }

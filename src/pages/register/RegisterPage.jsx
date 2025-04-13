@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../../components/MainLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { useMutation } from "@tanstack/react-query"
+import { signUp } from "../../services/index/users";
+import toast from "react-hot-toast";
+import { userActions } from "../../store/reducer/userReducers";
+import { useDispatch, useSelector } from "react-redux";
 const RegisterPage = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const userState = useSelector(state => state.user)
+  const {mutate, isLoading} = useMutation({
+    mutationFn: ({name, email, password}) => {
+      return signUp({name, email, password})
+    },
+    onSuccess: (data) => {
+      dispatch(userActions.setUserInfo(data))
+      localStorage.setItem('account', JSON.stringify(data))
+    },
+    onError: (error) => {
+      toast.error(error.message)
+      console.log(error)
+    }
+  })
+
+  useEffect(() => {
+    if(userState.userInfo){
+      navigate("/")
+      toast.success("You're already logged in :)")
+    }
+  }, [navigate, userState.userInfo])
+
   const {
     register,
     handleSubmit,
@@ -21,7 +49,8 @@ const RegisterPage = () => {
 
   const pass = watch("password")
   const submitHandler = (data) => {
-    console.log(data)
+    const {name, email, password} = data
+    mutate({name, email, password})
   };
   return (
     <MainLayout>
@@ -163,7 +192,7 @@ const RegisterPage = () => {
           </Link>
           <button
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid && !isLoading}
             className="bg-primary rounded-lg w-full px-8 py-4 font-bold text-base text-white mt-3 disabled:opacity-60 disabled:cursor-not-allowed"
             onClick={handleSubmit(submitHandler)}
           >
