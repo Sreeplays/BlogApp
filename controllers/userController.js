@@ -96,8 +96,8 @@ export const updateProfile = async (req, res, next) => {
     if(req.body.password == User.password) {
       throw new Error("Entered password matches with previous password!!")
     }
-    if(req.body.password && req.body.password.length < 6) {
-        throw new Error("Password must be atleast 6 characters")
+    if(req.body.password && req.body.password.length < 3) {
+        throw new Error("Password must be atleast 3 characters")
     } else if(req.body.password) {
         User.password = req.body.password;
     }
