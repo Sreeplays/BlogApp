@@ -1,8 +1,6 @@
 import React from 'react'
 import Articles from '../../../components/Articles'
 import { BiArrowFromLeft } from 'react-icons/bi'
-
-import { countActionsOnClick } from '../../../store/actions/countActions'
 const ArticleCard = () => {
   return (
     <div className='flex flex-col container mx-auto  py-10'>
