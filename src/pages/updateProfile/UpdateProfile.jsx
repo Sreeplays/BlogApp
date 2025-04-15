@@ -1,23 +1,49 @@
 import React, { useEffect } from "react";
 import MainLayout from "../../components/MainLayout";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { signUp } from "../../services/index/users";
 import toast from "react-hot-toast";
-import { userActions } from "../../store/reducer/userReducers";
 import { useDispatch, useSelector } from "react-redux";
-const RegisterPage = () => {
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getUserProfile, updateUserProfile } from "../../services/index/users";
+import ProfilePicture from "../../components/ProfilePicture";
+import { userLogout } from "../../store/actions/userActions";
+import { userActions } from "../../store/reducer/userReducers";
+
+const UpdateProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const userState = useSelector((state) => state.user);
+
+  const logoutHandler = () => {
+    dispatch(userLogout())
+  }
+
+  const {
+    data: profileData,
+    isLoading: profileIsLoading,
+    error: profileError,
+  } = useQuery({
+    queryFn: () => {
+      return getUserProfile({ token: userState.userInfo.token });
+    },
+    queryKey: ["profile"],
+  });
+
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ name, email, password }) => {
-      return signUp({ name, email, password });
+      return updateUserProfile({
+        token: userState.userInfo.token,
+        userData: {name, email, password}
+       });
     },
     onSuccess: (data) => {
       dispatch(userActions.setUserInfo(data));
       localStorage.setItem("account", JSON.stringify(data));
+      queryClient.invalidateQueries(["profile"])
+      toast.success(`${userState.userInfo.name}'s profile updated successfully`);
+      navigate('/profile')
     },
     onError: (error) => {
       toast.error(error.message);
@@ -26,9 +52,8 @@ const RegisterPage = () => {
   });
 
   useEffect(() => {
-    if (userState.userInfo) {
+    if (!userState.userInfo) {
       navigate("/");
-      toast.success("You're logged in :)");
     }
   }, [navigate, userState.userInfo]);
 
@@ -36,34 +61,34 @@ const RegisterPage = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    watch,
   } = useForm({
     defaultValues: {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "",
+    },
+    values: {
+      name: profileIsLoading ? "" : profileData.name,
+      email: profileIsLoading ? "" : profileData.email,
     },
     mode: "onChange",
   });
 
-  const pass = watch("password");
   const submitHandler = (data) => {
     const { name, email, password } = data;
     mutate({ name, email, password });
   };
+
   return (
     <MainLayout>
-      <section className="container mx-auto px-5 py-10">
+      <section className="container mx-auto px-5 py-10 ">
         <div className="w-full max-w-sm mx-auto">
-          <h1 className="text-4xl text-dark-hard font-sans font-bold text-center mb-6">
-            Sign Up
-          </h1>
+          <ProfilePicture avatar={profileData?.avatar} />
           <form onSubmit={handleSubmit(submitHandler)}>
-            <div className="flex flex-col mb-6 w-full">
+            <div className="flex flex-row justify-center items-center mb-6 w-full">
               <label
                 htmlFor="name"
-                className="block text-semibold text-[#323233]"
+                className="block font-bold text-[#323233] pt-3 px-5"
               >
                 Name
               </label>
@@ -82,17 +107,17 @@ const RegisterPage = () => {
                   },
                 })}
                 className={`font-semibold placeholder:text-[#5b5c5c] text-dark-hard px-5 py-4 mt-4 outline-none rounded-lg border focus:border-[#2c2c2c] ${
-                  errors.name ? "border-red-500" : "border-[#2c2c2c]"
-                } shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]`}
+                    errors.name ? "border-red-500" : "border-[#2c2c2c]"
+                  } shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]`}
               />
             </div>
             {errors.name?.message && (
               <p className="text-red-500 text-xs">{errors.name?.message}</p>
             )}
-            <div className="flex flex-col mb-6 w-full">
+            <div className="flex flex-row justify-center items-center mb-6 w-full">
               <label
                 htmlFor="email"
-                className="block text-semibold text-[#323233] mt-2"
+                className="block font-bold text-[#323233] mt-2 pt-2 px-5"
               >
                 Email
               </label>
@@ -112,73 +137,32 @@ const RegisterPage = () => {
                   },
                 })}
                 className={`font-semibold placeholder:text-[#5b5c5c] text-dark-hard px-5 py-4 mt-4 outline-none rounded-lg border focus:border-[#2c2c2c] ${
-                  errors.email ? "border-red-500" : "border-[#2c2c2c]"
-                } shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]`}
+                    errors.email ? "border-red-500" : "border-[#2c2c2c]"
+                  } shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]`}
               />
             </div>
             {errors.email?.message && (
               <p className="text-red-500 text-xs">{errors.email?.message}</p>
             )}
-            <div className="flex flex-col mb-6 w-full">
+            <div className="flex flex-row justify-center items-center mb-6 w-full">
               <label
                 htmlFor="password"
-                className="block text-semibold text-[#323233] mt-2"
+                className="block font-bold text-[#323233] mt-2 pt-2 px-8 text-sm"
               >
-                Password
+                New Pass (optional)
               </label>
               <input
                 type="password"
                 id="password"
-                placeholder="Enter your password"
-                {...register("password", {
-                  minLength: {
-                    value: 3,
-                    message: "Password should have more than 3 characters",
-                  },
-                  required: {
-                    value: true,
-                    message: "Please fill out this field!",
-                  },
-                })}
+                placeholder="Enter your new password (optional)"
+                {...register("password")}
                 className={`font-semibold placeholder:text-[#5b5c5c] text-dark-hard px-5 py-4 mt-4 outline-none rounded-lg border focus:border-[#2c2c2c] ${
-                  errors.password ? "border-red-500" : "border-[#2c2c2c]"
-                } shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]`}
+                    errors.password ? "border-red-500" : "border-[#2c2c2c]"
+                  } shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]`}
               />
             </div>
             {errors.password?.message && (
               <p className="text-red-500 text-xs">{errors.password?.message}</p>
-            )}
-            <div className="flex flex-col mb-6 w-full">
-              <label
-                htmlFor="confirmpassword"
-                className="block text-semibold text-[#323233] mt-2"
-              >
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                id="confirmpassword"
-                placeholder="Confirm your password"
-                {...register("confirmPassword", {
-                  required: {
-                    value: true,
-                    message: "Please fill out this field!",
-                  },
-                  validate: (value) => {
-                    if (value != pass) {
-                      return "Passwords do not not match :(";
-                    }
-                  },
-                })}
-                className={`font-semibold placeholder:text-[#5b5c5c] text-dark-hard px-5 py-4 mt-4 outline-none rounded-lg border focus:border-[#2c2c2c] ${
-                  errors.confirmPassword ? "border-red-500" : "border-[#2c2c2c]"
-                } shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]`}
-              />
-            </div>
-            {errors.confirmPassword?.message && (
-              <p className="text-red-500 text-xs">
-                {errors.confirmPassword?.message}
-              </p>
             )}
           </form>
           <div className="group relative w-full mt-6">
@@ -189,22 +173,13 @@ const RegisterPage = () => {
               className="relative w-full px-8 py-4 text-white bg-[#0D2436] rounded-xl font-bold text-base disabled:opacity-60 disabled:cursor-not-allowed z-10"
               onClick={handleSubmit(submitHandler)}
             >
-              Register
+              Update
             </button>
           </div>
-          <p className="text-dark-light text-[13px] font-roboto font-light mt-4 ">
-            Already have an account?
-            <Link
-              to="/login"
-              className="text-[#6479BD] text-xs font-sams font-bold mt-3 hover:underline"
-            >
-              Login
-            </Link>
-          </p>
         </div>
       </section>
     </MainLayout>
   );
 };
 
-export default RegisterPage;
+export default UpdateProfile;

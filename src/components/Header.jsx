@@ -10,8 +10,11 @@ import { FiArrowDown } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogout } from "../store/actions/userActions";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Header = () => {
+  const navigate = useNavigate()
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
   const [isOpen, setOpen] = useState(false);
@@ -115,11 +118,12 @@ const Header = () => {
   const profileButton = () => {
     const logoutHandler = () => {
       dispatch(userLogout());
+      toast.success("You're logged out 👍")
     };
     return (
       <div className="w-36 h-[90px] bg-slate-300 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] rounded-xl flex flex-col justify-center items-center">
-        <button className="w-full border-b pb-2 pt-2 border-b-gray-300 rounded-md hover:transition-colors hover:bg-dark-hard hover:text-white hover:duration-200 text-center">
-          Dashboard
+        <button className="w-full border-b pb-2 pt-2 border-b-gray-300 rounded-md hover:transition-colors hover:bg-dark-hard hover:text-white hover:duration-200 text-center" onClick={() => navigate("/profile")}>
+          Profile
         </button>
         <button
           className="w-full py-2 rounded-md hover:transition-colors hover:bg-dark-hard hover:text-white hover:duration-200 text-center"
@@ -161,7 +165,7 @@ const Header = () => {
               {userState.userInfo ? (
                 <PagesLink Content={profileButton}>
                   <button className="mr-2 mt-2.5 flex flex-row">
-                    Profile <IoIosArrowDown className="mt-1.5" />{" "}
+                    Account <IoIosArrowDown className="mt-1.5" />{" "}
                   </button>
                 </PagesLink>
               ) : (
@@ -214,7 +218,7 @@ const Header = () => {
               <PagesLinkMob ContentMob={profileButton}>
                 <div className="flex flex-col justify-end items-end">
                   <button className="w-full mt-2.5 flex flex-row mb-4">
-                    Profile <IoIosArrowDown className="mt-1.5" />
+                    Account <IoIosArrowDown className="mt-1.5" />
                   </button>
                 </div>
               </PagesLinkMob>

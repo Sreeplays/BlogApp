@@ -2,50 +2,50 @@ import React, { useEffect } from "react";
 import MainLayout from "../../components/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query";
 import { login } from "../../services/index/users";
 import toast from "react-hot-toast";
 import { userActions } from "../../store/reducer/userReducers";
 import { useDispatch, useSelector } from "react-redux";
 const LoginPage = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const userState = useSelector(state => state.user)
-  const {mutate, isLoading} = useMutation({
-    mutationFn: ({email, password}) => {
-      return login({email, password})
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ email, password }) => {
+      return login({ email, password });
     },
     onSuccess: (data) => {
-      dispatch(userActions.setUserInfo(data))
-      localStorage.setItem('account', JSON.stringify(data))
+      dispatch(userActions.setUserInfo(data));
+      localStorage.setItem("account", JSON.stringify(data));
     },
     onError: (error) => {
-      toast.error(error.message)
-      console.log(error)
-    }
-  })
+      toast.error(error.message);
+      console.log(error);
+    },
+  });
 
   useEffect(() => {
-    if(userState.userInfo){
-      navigate("/")
-      toast.success("You're already logged in :)")
+    if (userState.userInfo) {
+      navigate("/");
+      toast.success("You're logged in :)");
     }
-  }, [navigate, userState.userInfo])
+  }, [navigate, userState.userInfo]);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid }
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       email: "",
-      password: ""
+      password: "",
     },
     mode: "onChange",
   });
   const submitHandler = (data) => {
-    const {email, password} = data
-    mutate({email, password})
+    const { email, password } = data;
+    mutate({ email, password });
   };
   return (
     <MainLayout>
@@ -66,7 +66,6 @@ const LoginPage = () => {
                 type="text"
                 id="email"
                 placeholder="Enter your email"
-                
                 {...register("email", {
                   required: {
                     value: true,
@@ -97,7 +96,6 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 placeholder="Enter your password"
-                
                 {...register("password", {
                   minLength: {
                     value: 3,
@@ -115,7 +113,7 @@ const LoginPage = () => {
             </div>
             {errors.password?.message && (
               <p className="text-red-500 text-xs">{errors.password?.message}</p>
-            )} 
+            )}
           </form>
           <Link
             to="/forgot-password"
@@ -123,14 +121,17 @@ const LoginPage = () => {
           >
             Forgot password?
           </Link>
-          <button
-            type="submit"
-            disabled={!isValid && !isLoading}
-            className="bg-primary rounded-lg w-full px-8 py-4 font-bold text-base text-white mt-3 disabled:opacity-60 disabled:cursor-not-allowed"
-            onClick={handleSubmit(submitHandler)}
-          >
-            Log In
-          </button>
+          <div className="group relative w-full mt-6">
+            <div className="pointer-events-none absolute -inset-0.5 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 blur-sm opacity-75 group-hover:opacity-100 transition duration-700 animate-tilt" />
+            <button
+              type="submit"
+              disabled={!isValid && !isLoading}
+              className="relative w-full px-8 py-4 text-white bg-[#0D2436] rounded-xl font-bold text-base disabled:opacity-60 disabled:cursor-not-allowed z-10"
+              onClick={handleSubmit(submitHandler)}
+            >
+              Login
+            </button>
+          </div>
           <p className="text-dark-light text-[13px] font-roboto font-light mt-4 ">
             Don't have an account?
             <Link
