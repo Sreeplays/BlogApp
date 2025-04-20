@@ -3,6 +3,7 @@ module.exports = {
     content: [
       "./src/**/*.{js,jsx,ts,tsx}",
     ],
+    plugins: [require("daisyui")],
     theme: {
       screens: {
         xs: '300px', 

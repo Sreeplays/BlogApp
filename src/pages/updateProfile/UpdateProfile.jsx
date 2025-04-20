@@ -9,6 +9,7 @@ import { getUserProfile, updateUserProfile } from "../../services/index/users";
 import ProfilePicture from "../../components/ProfilePicture";
 import { userLogout } from "../../store/actions/userActions";
 import { userActions } from "../../store/reducer/userReducers";
+import { BiSolidArrowFromRight } from "react-icons/bi";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const UpdateProfile = () => {
     queryKey: ["profile"],
   });
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isLoading: updateIsLoading } = useMutation({
     mutationFn: ({ name, email, password }) => {
       return updateUserProfile({
         token: userState.userInfo.token,
@@ -83,6 +84,8 @@ const UpdateProfile = () => {
     <MainLayout>
       <section className="container mx-auto px-5 py-10 ">
         <div className="w-full max-w-sm mx-auto">
+          <a href="/profile" className="text-xs text-dark-hard hover:underline font-bold"><BiSolidArrowFromRight className="w-6 h-6"/>
+          </a>
           <ProfilePicture avatar={profileData?.avatar} />
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="flex flex-row justify-center items-center mb-6 w-full">
@@ -147,9 +150,9 @@ const UpdateProfile = () => {
             <div className="flex flex-row justify-center items-center mb-6 w-full">
               <label
                 htmlFor="password"
-                className="block font-bold text-[#323233] mt-2 pt-2 px-8 text-sm"
+                className="block font-bold text-[#323233] mt-2 pt-2 px-4 text-sm"
               >
-                New Pass (optional)
+                New Pass
               </label>
               <input
                 type="password"
@@ -169,7 +172,7 @@ const UpdateProfile = () => {
             <div className="pointer-events-none absolute -inset-0.5 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 blur-sm opacity-75 group-hover:opacity-100 transition duration-700 animate-tilt" />
             <button
               type="submit"
-              disabled={!isValid && !isLoading}
+              disabled={!isValid && !updateIsLoading}
               className="relative w-full px-8 py-4 text-white bg-[#0D2436] rounded-xl font-bold text-base disabled:opacity-60 disabled:cursor-not-allowed z-10"
               onClick={handleSubmit(submitHandler)}
             >

@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { getUserProfile } from "../../services/index/users";
-import ProfilePicture from "../../components/ProfilePicture";
 import { userLogout } from "../../store/actions/userActions";
+import ProfilePictureConst from "../../components/ProfilePictureConst";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -54,9 +54,9 @@ const ProfilePage = () => {
   });
   return (
     <MainLayout>
-      <section className="container mx-auto px-5 py-10 ">
+      <section className="container mx-auto px-5 py-10 h-[550px]">
         <div className="w-full max-w-sm mx-auto">
-          <ProfilePicture avatar={profileData?.avatar} />
+          <ProfilePictureConst avatar={profileData?.avatar} />
           <form>
             <div className="flex flex-row justify-center items-center mb-6 w-full">
               <label
