@@ -9,12 +9,14 @@ import toast from 'react-hot-toast'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { userActions } from '../store/reducer/userReducers'
 import { updateUserProfilePicture } from '../services/index/users'
+import ConfirmationModal from './ConfirmationModal'
 const ProfilePicture = ({avatar}) => {
   const userState= useSelector((state) => state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [openCropper, setopenCropper] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const [photo, setPhoto] = useState(null)
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -33,7 +35,7 @@ const ProfilePicture = ({avatar}) => {
       dispatch(userActions.setUserInfo(data));
       localStorage.setItem("account", JSON.stringify(data));
       queryClient.invalidateQueries(["profile"])
-      toast.success(`${userState.userInfo.name}'s avatar updated successfully`);
+      toast.success(`${userState.userInfo.name}'s avatar removed successfully`);
       navigate('/profile')
     },
     onError: (error) => {
@@ -43,6 +45,7 @@ const ProfilePicture = ({avatar}) => {
   });
 
   const handleDeleteImage = () => {
+    setShowModal(false)
     try {
       const formData = new FormData()
       formData.append("profilePicture", undefined)
@@ -52,11 +55,14 @@ const ProfilePicture = ({avatar}) => {
       console.log(error)
     }
   }
+  const cancelDelete = () => {
+    setShowModal(false)
+  }
 
   return (
     <>
     {openCropper && createPortal(<CropPic photo={photo} setopenCropper={setopenCropper} />, document.getElementById('portal')) }
-   
+    {showModal && createPortal(<ConfirmationModal title="Delete Profile Picture" message="Are your sure you want to delete your profile picture?" onCancel={cancelDelete} onConfirm={handleDeleteImage} isOpen={showModal}/>, document.getElementById('confirmationModal'))}
     <div className='w-full flex flex-row justify-center items-center gap-x-6'>
       <p className='text-base font-bold'>Photo:</p>
       <div className='relative w-20 h-20 rounded-full outline outline-offset-2 outline-1 outline-primary overflow-hidden'>
@@ -71,7 +77,7 @@ const ProfilePicture = ({avatar}) => {
         </label>
         <input type="file" className='sr-only' id='profilePicture' onChange={handleFileChange}/>
       </div>
-      {avatar && <button type="button" className='border border-red-500 text-red-500 rounded-lg py-1.5 px-3 mt-2 text-xs justify-center items-center' onClick={handleDeleteImage} disabled={isLoading}>Delete</button>}
+      {avatar && <button type="button" className='border border-red-500 text-red-500 rounded-lg py-1.5 px-3 mt-2 text-xs justify-center items-center' onClick={() => setShowModal(true)} disabled={isLoading}>Delete</button>}
       
     </div>
     </>

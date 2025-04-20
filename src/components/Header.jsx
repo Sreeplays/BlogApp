@@ -164,8 +164,8 @@ const Header = () => {
             <div className="md:flex hidden pr-3 lg:right-2 right-4 fixed top-1.5">
               {userState.userInfo ? (
                 <PagesLink Content={profileButton}>
-                  <button className="mr-2 mt-2.5 flex flex-row">
-                    Account <IoIosArrowDown className="mt-1.5" />{" "}
+                  <button className=" mr-2 flex flex-row border border-dark-soft rounded-full px-4 py-2 hover:bg-dark-soft hover:font-semibold hover:text-white hover:transition-colors hover:duration-300">
+                    <IoIosArrowDown className="mt-1.5 mr-0.5" /> Account 
                   </button>
                 </PagesLink>
               ) : (

@@ -86,8 +86,8 @@ const CropPic = ({photo, setopenCropper}) => {
           <Input type="range" id="zoomRange" className='w-full bg-gray-200 h-1 mb-6 rounded-full appearance-none range-sm range-primary' min={1} max={3} step={0.1} value={zoom} onChange={(e) => setZoom(e.target.value)}/>
         </div>
         <div className='flex justify-between flex-wrap gap-2'>
-          <button disabled={isLoading} onClick={() => setopenCropper(false)} className='px-4 py-2 text-red-500 border border-red-500 mb-2 disabled:opacity-65 text-sm rounded-lg hover:bg-red-500 hover:font-bold hover:text-white'>Cancel</button>
-          <button disabled={isLoading} onClick={handleCroppedImage} className='px-4 py-2 text-dark-soft border border-dark-soft mb-2 disabled:opacity-65 text-sm rounded-lg hover:bg-dark-soft hover:font-bold hover:text-white'>Upload</button>
+          <button disabled={isLoading} onClick={() => setopenCropper(false)} className='px-4 py-2 text-red-500 border border-red-500 mb-2 disabled:opacity-65 text-sm rounded-lg hover:bg-red-500 hover:font-bold hover:text-white hover:transition-colors hover:duration-300'>Cancel</button>
+          <button disabled={isLoading} onClick={handleCroppedImage} className='px-4 py-2 text-dark-soft border border-dark-soft mb-2 disabled:opacity-65 text-sm rounded-lg hover:bg-dark-soft hover:font-bold hover:text-white hover:transition-colors hover:duration-300'>Upload</button>
         </div>
       </div>
     </div>
