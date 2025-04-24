@@ -3,8 +3,10 @@ import dotenv from "dotenv";
 import path from "path"
 import connectedDB from "./config/db.js";
 import routes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
 import { errorResponseHandler, invalidURLHandler } from "./middleware/errorHandler.js";
 import { fileURLToPath } from "url";
+import postRoutes from "./routes/postRoutes.js";
 
 dotenv.config();
 connectedDB()
@@ -16,6 +18,7 @@ app.get('/', (req, res) => {
     res.send("Server is running!!")
 })
 app.use('/api/users', routes)
+app.use('/api/posts', postRoutes)
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
