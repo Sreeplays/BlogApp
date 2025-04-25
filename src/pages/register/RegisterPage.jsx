@@ -59,7 +59,7 @@ const RegisterPage = () => {
           <h1 className="text-4xl text-dark-hard font-sans font-bold text-center mb-6">
             Sign Up
           </h1>
-          <form onSubmit={handleSubmit(submitHandler)}>
+          <form onSubmit={handleSubmit(submitHandler)} className="animate-jump">
             <div className="flex flex-col mb-6 w-full">
               <label
                 htmlFor="name"

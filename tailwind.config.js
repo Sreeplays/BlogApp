@@ -61,6 +61,20 @@ module.exports = {
               "0 0px 20px rgba(0, 223, 154, 0.35)",
               "0 0px 65px rgba(255, 255,255, 0.2)"
             ]
+        },
+        keyframes: {
+          jump: {
+            '0%, 100%': { transform: 'translateY(0)' },
+            '50%': { transform: 'translateY(-5px)' },
+          },
+          jumpx: {
+            '0%, 100%': { transform: 'translateX(0)' },
+            '50%': { transform: 'translateX(-10px)' },
+          }
+        },
+        animation: {
+          jump: 'jump 0.8s ease-in-out infinite alternate',
+          jumpx: 'jumpx 0.6s ease-in-out infinite alternate'
         }
         
       }
