@@ -19,3 +19,12 @@ export const authGuard = async (req, res, next) => {
         next(error);
     }
 }
+export const adminGuard = async (req, res, next) => {
+    if (req.user && req.user.admin) {
+        next()
+    } else {
+        const error = new Error("Not authorized as an admin")
+        error.statusCode = 400
+        next(error)
+    }
+}

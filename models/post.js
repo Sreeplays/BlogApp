@@ -7,12 +7,12 @@ const postSchema = new Schema(
     caption: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
     body: { type: Object, required: true },
-    photo: {type: String, required: true},
+    photo: {type: String, required: false},
     user: { type: Schema.Types.ObjectId, ref: "user", required: true },
     tags: { type: [String] },
     categories: [{type: Schema.Types.ObjectId, ref: "postCategories"}]
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: {virtuals: true}}
 );
 
 postSchema.virtual('comment', {

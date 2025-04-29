@@ -18,7 +18,7 @@ const commentsSchema = new Schema(
         default: null
     }
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: {virtuals: true} }
 );
 
 commentsSchema.virtual('replies', {

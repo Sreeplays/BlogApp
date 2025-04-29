@@ -11,7 +11,7 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     verified: { type: Boolean, default: false },
     verificationCode: { type: String, required: false },
-    admin: {type: Boolean, default: true}
+    admin: {type: Boolean, default: false}
   },
   { timestamps: true }
 );
