@@ -7,6 +7,8 @@ import userImage from  '../assets/posts-images/post-user-img.png'
 import testIcon from '../assets/posts-images/Icon.png'
 import cardImg from '../assets/card.png'
 import FooterLogo from '../assets/Logo2-removebg-preview.png'
+const sampleImage = "/images/sample-2.jpg"
+const sampleUserImage = "/images/user.png"
 const images = {
  logo,
  HeroImage,
@@ -15,7 +17,9 @@ const images = {
  userImage,
  testIcon,
  cardImg,
- FooterLogo
+ FooterLogo,
+ sampleImage,
+ sampleUserImage
 }
 
 export default images
