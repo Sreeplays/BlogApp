@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const fileRemover = (filename) => {
-    fs.unlink(path.join(__dirname, '../uploads/profile', filename), function (err) {
+export const fileRemoverPost = (filename) => {
+    fs.unlink(path.join(__dirname, '../uploads/postUploads', filename), function (err) {
         if(err && err.code == "ENOENT"){
             console.log(`File ${filename} does not exist`)
         } else if(err){

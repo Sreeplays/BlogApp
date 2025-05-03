@@ -7,14 +7,14 @@ const __dirname = path.dirname(__filename);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../uploads/profile"));
+    cb(null, path.join(__dirname, "../uploads/postUploads"));
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
-const uploadPicture = multer({
+const uploadPostPicture = multer({
   storage: storage,
   limits: {
     fileSize: 1 * 1000000, // 1MB
@@ -28,4 +28,4 @@ const uploadPicture = multer({
   },
 });
 
-export { uploadPicture };
+export { uploadPostPicture };

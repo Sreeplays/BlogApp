@@ -1,6 +1,6 @@
-import { uploadPicture } from "../middleware/uploadPicMiddleware.js";
+import { uploadPostPicture } from "../middleware/uploadPostPicMiddleware.js";
 import post from "../models/post.js";
-import { fileRemover } from "../utils/fileRemover.js";
+import { fileRemoverPost } from "../utils/fileRemoverPost.js";
 import { v4 as uuid4 } from "uuid";
 import comments from "../models/comments.js";
 export const createPost = async (req, res, next) => {
@@ -31,7 +31,7 @@ export const updatePost = async (req, res, next) => {
       return next(error);
     }
 
-    const upload = uploadPicture.single("postPicture");
+    const upload = uploadPostPicture.single("postPicture");
 
     upload(req, res, async function (err) {
       if (err) {
@@ -54,14 +54,17 @@ export const updatePost = async (req, res, next) => {
         if (categories) foundPost.categories = categories;
 
         if (req.file) {
-          if (foundPost.photo) {
-            fileRemover(foundPost.photo);
+          let fileName
+          const foundPost = await post.findOne({slug: req.params.slug})
+          fileName = foundPost.photo
+          if (fileName) {
+            fileRemoverPost(foundPost.photo);
           }
           foundPost.photo = req.file.filename;
         } else if (req.body.removePhoto === "true") {
           // If client sends removePhoto = true, delete existing photo
           if (foundPost.photo) {
-            fileRemover(foundPost.photo);
+            fileRemoverPost(foundPost.photo);
           }
           foundPost.photo = "";
         }
