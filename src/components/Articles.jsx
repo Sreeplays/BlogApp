@@ -9,7 +9,7 @@ const Articles = ({post, className}) => {
   return (
     <div className=''>
     <div className={'rounded-xl overflow-hidden shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]'}>
-      <img src={post.photo ? stables.PROFILE_PIC_DEFAULT_URL + post.photo : images.sampleImage} alt="Article Card Image" className='w-full object-cover object-center h-auto'/>
+      <img src={post.photo ? stables.POST_PIC_DEFAULT_URL + post.photo : images.sampleImage} alt="Article Card Image" className='w-full object-cover object-center h-auto'/>
       <div className='p-6'>
         <h3 className='text-dark-soft font-bold text-3xl px-4' >{post.title}</h3>
         <p className='text-dark-soft font-normal pt-3 px-4 text-md'>{post.caption}</p>
