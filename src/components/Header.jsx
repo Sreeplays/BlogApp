@@ -13,7 +13,7 @@ import { userLogout } from "../store/actions/userActions";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const Header = () => {
+const Header = ({}) => {
   const navigate = useNavigate()
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
@@ -152,7 +152,7 @@ const Header = () => {
             <div className="my-4 hidden md:flex">
               <div className="pl-6">
                 {" "}
-                <NavLink href="/blog/:id">Blog</NavLink>
+                <NavLink href="/blog/allPosts">Blog</NavLink>
               </div>
               {/* Children and the content is passed through here to PagesLink CONSTANT */}
               <PagesLink Content={pageContent}>
@@ -204,7 +204,7 @@ const Header = () => {
             className="md:hidden w-full pt-2 pr-2 bg-slate-50 shadow-md fixed"
           >
             <div className="pl-3 border-b pb-3 pt-2 border-b-gray-300 rounded-md border-l-gray-300 border-r-gray-300">
-              <NavLink href="/blog/:id">Blog</NavLink>
+              <NavLink href="/blog/allPosts">Blog</NavLink>
             </div>
             <PagesLinkMob href="javaScript:;" ContentMob={pageContent}>
               Pages
