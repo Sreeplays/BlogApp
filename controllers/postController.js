@@ -54,11 +54,10 @@ export const updatePost = async (req, res, next) => {
         if (categories) foundPost.categories = categories;
 
         if (req.file) {
-          let fileName
-          const foundPost = await post.findOne({slug: req.params.slug})
-          fileName = foundPost.photo
+          let fileName;
+          fileName = foundPost.photo;
           if (fileName) {
-            fileRemoverPost(foundPost.photo);
+            fileRemoverPost(fileName);
           }
           foundPost.photo = req.file.filename;
         } else if (req.body.removePhoto === "true") {
@@ -111,21 +110,21 @@ export const getPost = async (req, res, next) => {
         path: "comment",
         match: {
           check: true,
-          parent: null
+          parent: null,
         },
         populate: [
           {
             path: "user",
-            select: ["avatar", "name"] 
+            select: ["avatar", "name"],
           },
           {
             path: "replies",
             match: {
-              check: true
-            }
-          }
-        ]
-      }
+              check: true,
+            },
+          },
+        ],
+      },
     ]);
 
     if (!Post) {
@@ -139,16 +138,21 @@ export const getPost = async (req, res, next) => {
   }
 };
 
-export const getAllPosts = async(req, res, next) => {
+export const getAllPosts = async (req, res, next) => {
   try {
-    const Post = await post.find({}).populate([
-      {
-        path: "user",
-        select: ["avatar", "name", "verified"]
-      }
-    ])
-    res.json(Post)
+    const limit = parseInt(req.query.limit) || 0;
+    const Post = await post
+      .find({})
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .populate([
+        {
+          path: "user",
+          select: ["avatar", "name", "verified"],
+        },
+      ]);
+    res.json(Post);
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
